@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Anomaly Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="../static/stylesheets/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel=stylesheet type=text/css href="{{ url_for('static, filename='stylesheets/styles.css') }}">
+  <link href="{{ url_for('static', filename='js/index.js') }}">
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="./index.html">Detecting Outliers
+            <img class="nav-detect" src="../images/anomaly_detection.jpg">
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="hero text-center">
+      <h1>Anomaly Detection</h1>
+      <p>Usine Machine Learning</p>
+    </div>
+
+    <!-- Choose and submit csv file-->
+    <div class="container">
+      <div class="row margin-top-50">
+        <div class="col-sm-12">
+          <aside class="selectfile">
+            <div class="panel panel-default">
+              <div class="panel-heading">Data Extraction</div>
+              <div class="panel-body">
+                <form id="myFile" method="post" action="/upload"></form>
+                <div class="form-group">
+                  <ul class="list-group" id="filters">
+                    <li class="filter list-group-item">
+                      <label for="file">Choose file to upload</label>
+                      <input type="file" id="file" name="file"></li></input>
+                    </li>
+                  </ul>
+                </div>
+                <form>
+              </div>
+            </div>
+
+
+            <!-- Select Filters-->
+            <div class="container">
+              <div class="row margin-top-50">
+                <div class="col-md-12">
+                  <aside class="filters">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">Filter Search</div>
+                      <div class="panel-body">
+                        <form id="myForm" method="post" action="/submit_form">
+                        <div class="form-group">
+                          <ul class="list-group" id="filters">
+                            <li class="filter list-group-item">
+                              <label for="id">Select ID Column</label>
+                              <select id="id" name="id" multiple> </select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="time-series">Select Time Series Column</label>
+                              <select id="time-series" name="time-series" multiple></select>
+
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="dimesion">Select Dimension Column</label>
+                              <select id="dimension" name="dimension" multiple></select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="label">Select Label Column</label>
+                              <select id="label" name="label" multiple></select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="fact">Select Fact Column</label>
+                              <select id="fact" name="fact" multiple></select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="model">Select Model Type</label>
+                              <select id="model" name="model">
+                                <option default value="">Select</option>
+                                <option value="v1">Supervised</option>
+                                <option value="v2">Unsupervised</option>
+                              </select>
+                            </li>
+                          </ul>
+                        </div>
+                        </form>
+                      </div>
+                    </div>
+
+                    <!-- Submit selected data-->
+                    <div class="container">
+                      <div class="row margin-top-50">
+                        <div class="col-md-12">
+                          <aside class="datasubmit">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">Submit Data</div>
+                              <div class="panel-body">
+                                <div class="form-group">
+                                  <ul class="list-group" id="filters">
+                                    <li class="filter list-group-item">
+
+                                      <div id="myProgress">
+                                        <div id="myBar"></div>
+                                      </div>
+                                      <br>
+                                      <button onclick="move()">Click Me</button>
+                                      </select>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+
+                          </aside>
+                        </div>
+
+<!-- Submit selected data -->
+                  <script>
+                      function move() {
+                        var elem = document.getElementById("myBar");
+                        var width = 1;
+                        var id = setInterval(frame, 10);
+                        function frame() {
+                          if (width >= 100) {
+                            clearInterval(id);
+                          } else {
+                            width++;
+                            elem.style.width = width + '%';
+                          }
+                        }
+                        //submit form
+                        $('form#myForm').submit();
+                      }
+                    </script>
+
+
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+                  <script src="../static/js/index.js"></script>
+
+
+
+</body>
+</html>
